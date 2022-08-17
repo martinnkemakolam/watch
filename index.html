@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        margin: 0;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #e4f6;
+    }
+
+    .time-container {
+        margin-bottom: 4rem;
+    }
+
+    .time {
+        font-size: 5rem;
+        color: whitesmoke;
+        margin: 1rem;
+    }
+
+    .btn {
+        border: 1px solid white;
+        padding: 1rem 2rem;
+        color: #eee;
+        font-size: medium;
+        background-color: #e4f6;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="time-container">
+            <span class="time" id="hr">00</span>
+            <span class="time" id="min">00</span>
+            <span class="time" id="sec">00</span>
+        </div>
+        <div class="btn-container">
+            <button class="btn" id="start">START</button>
+            <button class="btn" id="stop">STOP</button>
+            <button class="btn" id="reset">RESET</button>
+        </div>
+    </div>
+</body>
+<script>
+    let hour = document.getElementById('hr');
+    let minute = document.getElementById('min');
+    let second = document.getElementById('sec');
+    let hourValue = 0;
+    let minuteValue = 0;
+    let secondValue = 0;
+    let start = document.getElementById('start');
+    let stop = document.getElementById('stop');
+    let reset = document.getElementById('reset');
+
+    var timestart;
+    start.onclick = () => {
+        timestart = true
+    }
+    stop.onclick = () => {
+        timestart = false
+    }
+    reset.onclick = () => {
+        secondValue = 0
+        timestart = false
+    }
+    function timeercount() {
+        if (timestart == true) {
+            secondValue += 1
+            console.log(secondValue)
+            if (secondValue == 60) {
+                minuteValue += 1;
+                secondValue = 0;
+                console.log('yes')
+            } else if (minuteValue == 60) {
+                hourValue += 1;
+                minuteValue = 0;
+            } else if (hourValue == 60) {
+                alert('cant count')
+            }
+            hour.innerHTML = hourValue
+            minute.innerHTML = `${minuteValue}`
+            second.innerHTML = secondValue
+        }
+        setTimeout('timeercount()', 1000)
+    }
+</script>
+
+</html>
